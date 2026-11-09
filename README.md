@@ -7,6 +7,53 @@
 - Augementation: It means sending those information as a context to LLM
 - Generation : It means LLM is generating the response using context and user question
 
-#### LLM Limitations and RAG Solevs
+#### LLM Limitations and RAG Solevs that
 
-- Knowledge 
+- Knowledge Limations : An LLM trained on a particular dataset ,It may not know you company data
+
+- Hallacunations: If LLM does not have any data related to you question,Its generated their own answer
+
+- Updations: If your company changes its HR policy, you don't want to retrain the entire LLM just to update that information.
+
+##### Note: 
+RAG does not solve the hallucinations problem completely,It depends on your retrieval quality ,context quality and the LLM ability to use that retrieved information 
+
+### RAG Architecture
+- Mainly It has two pipelines
+    - 1.Data Ingestion pipeline
+         steps:
+          - Data Loading
+          - Document Parsing(very important):Extracting meaningful content from different file formates
+          - Document Cleaning
+          - Document Splitting(chunking):It is the process of splitng large documents into small pieces so retrievel will become effiecinet
+             - you can split the chunks using two fields 1.chunk_size 1.chunk_overlap
+                - chunk_size: It tells How much data contains in each chunk ,it depends on splitter
+                - chunk_overlap: mainly chunk overlap is used for preserve the meaning between chunks
+                - Interview Point: too little overlap means lossing meaning ,too large overlap means redudant chunks and increases the storage as well as 
+              - Types of chunking
+                - fixed size chunking
+                - recursive splitter chunking  
+          - Embedding Generation 
+          - storing vectors in vector database
+    - 2.Retrieval pipeline
+        steps:
+          - user query
+          - query embedding
+          - similarity search
+          This process is called as retrieval
+            - Retrieval: Retrieval means process of finding the relevant documents or document chunk from knowledge base 
+          - context construction
+          - prompt construction
+          - output generation using LLM
+        - Knowledge base or vector database are not same ,A knowledge base is a overall collection of knowledge and A vector database is a one technology to store its vectors
+
+    #### what is similarity search
+    - similarity search is a process of finding a vector that are closest to given query vector based on the similarity or distance
+    - Common similarity metrics
+          - cosine similarity : measure the angle between two vectors
+          - Euclidean distance : findout the distance between the two points
+          - Dot Porduct :
+
+    #### Contex Window
+    - context window or context size is nothing but max number of tokens a model can process in a single request or input. Ex:GPT-6 context size is 1,050,000
+
