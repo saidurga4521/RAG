@@ -2,4 +2,4 @@ langchain
 langchain-core
 langchain-community
 pypdf
-ptmupdf
+pymupdf
